@@ -5,7 +5,7 @@ const { featching_all } = require('../../Helper_fn/Featching_data.js')
 const jwt = require('jsonwebtoken')
 const { user_signin, user_login, Forgot_password, Reset_password } = require('../Controllers/UserController')
 const passport = require('passport');
-// const { error } = require('firebase-functions/logger')
+const { error } = require('firebase-functions/logger')
 const dotenv = require('dotenv')
 dotenv.config()
 

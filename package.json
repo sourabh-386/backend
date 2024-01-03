@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
+  "scripts":  {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node Server.js",
     "client": "npm start --prefix ./dist",
@@ -30,7 +30,6 @@
     "passport-google-oauth20": "^2.0.0",
     "passport-linkedin-oauth2": "^2.0.0",
     "path": "^0.12.7",
-    "react-linkedin-login-oauth2": "^2.0.1",
-    "stable": "^0.1.8"
+    "react-linkedin-login-oauth2": "^2.0.1"
   }
 }

@@ -6,7 +6,7 @@ const path = require('path')
 const UserRout = require('./MVC/Routs/UserRout')
 const PrivateRoute = require('./MVC/Routs/PrivateRoutes.js')
 const GoogleRout = require('./MVC/Routs/GoogleAuth.js')
-const LinkdinRout = require('./MVC/Routs/LinkdinAuth.js')
+// const LinkdinRout = require('./MVC/Routs/LinkdinAuth.js')
 const JobPrivateRoute = require('./MVC/Routs/JobRoutPrivate.js')
 
 
@@ -61,7 +61,7 @@ app.use('/user', UserRout)
 
 app.use('/auth', GoogleRout)
 
-app.use('/linkdin', LinkdinRout)
+// app.use('/linkdin', LinkdinRout)
 
 app.use('/jobs', JobPrivateRoute)
 
@@ -72,6 +72,7 @@ app.use('/athenticatedUsers', AuthMiddleware, PrivateRoute)
 //static files
 
 app.use(express.static(path.join(__dirname, "./dist")));
+
 
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, "./dist/index.html"));
