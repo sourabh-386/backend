@@ -1,7 +1,7 @@
 const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser');
-const { path } = require('path')
+const path = require('path')
 
 const UserRout = require('./MVC/Routs/UserRout')
 const PrivateRoute = require('./MVC/Routs/PrivateRoutes.js')
