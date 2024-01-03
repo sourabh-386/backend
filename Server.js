@@ -8,7 +8,7 @@ const PrivateRoute = require('./MVC/Routs/PrivateRoutes.js')
 const GoogleRout = require('./MVC/Routs/GoogleAuth.js')
 const LinkdinRout = require('./MVC/Routs/LinkdinAuth.js')
 const JobPrivateRoute = require('./MVC/Routs/JobRoutPrivate.js')
-const { path } = require('path')
+
 
 const { AuthMiddleware } = require('./Middleware/Auth_middleware.js')
 
