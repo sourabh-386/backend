@@ -27,7 +27,7 @@ GoogleRout
                 conn = await db.getConnection(); //transition connected to database
 
 
-                console.log('req.user',req.user)
+                console.log('req.user', req.user)
                 const user = req.user.user
                 console.log('user', user)
 
@@ -54,16 +54,16 @@ GoogleRout
                 conn.release();
 
                 if (recordExists && recordExists2) {
-                    res.status(200).send({ 'val': 'Login Successfull', 'token': jwtToken, 'Data1': true, 'Data2': true, 'output': data,User_id:User_id })
+                    res.status(200).send({ 'val': 'Login Successfull', 'token': jwtToken, 'Data1': true, 'Data2': true, 'output': data, User_id: User_id })
                 }
                 else if (recordExists) {
-                    res.status(200).send({ 'val': 'Login Successfull', 'token': jwtToken, 'Data1': true, 'Data2': false, 'output': data,User_id:User_id })
+                    res.status(200).send({ 'val': 'Login Successfull', 'token': jwtToken, 'Data1': true, 'Data2': false, 'output': data, User_id: User_id })
                 }
                 else if (recordExists2) {
-                    res.status(200).send({ 'val': 'Login Successfull', 'token': jwtToken, 'Data2': true, 'Data1': false, 'output': data,User_id:User_id })
+                    res.status(200).send({ 'val': 'Login Successfull', 'token': jwtToken, 'Data2': true, 'Data1': false, 'output': data, User_id: User_id })
                 }
                 else {
-                    res.status(200).send({ 'val': 'Login Successfull', 'token': jwtToken, 'Data1': false, 'Data2': false, 'output': data,User_id:User_id })
+                    res.status(200).send({ 'val': 'Login Successfull', 'token': jwtToken, 'Data1': false, 'Data2': false, 'output': data, User_id: User_id })
                 }
 
             }

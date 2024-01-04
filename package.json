@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts":  {
+  "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node Server.js",
     "client": "npm start --prefix ./dist",
@@ -22,7 +22,7 @@
     "google-auth-library": "^9.4.1",
     "jsonwebtoken": "^9.0.2",
     "multer": "^1.4.5-lts.1",
-    "mysql2": "^3.6.3",
+    "mysql2": "^3.6.5",
     "nodemailer": "^6.9.7",
     "nodemailer-express-handlebars": "^6.1.0",
     "nodemon": "^3.0.1",

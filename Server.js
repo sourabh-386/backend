@@ -6,7 +6,6 @@ const path = require('path')
 const UserRout = require('./MVC/Routs/UserRout')
 const PrivateRoute = require('./MVC/Routs/PrivateRoutes.js')
 const GoogleRout = require('./MVC/Routs/GoogleAuth.js')
-// const LinkdinRout = require('./MVC/Routs/LinkdinAuth.js')
 const JobPrivateRoute = require('./MVC/Routs/JobRoutPrivate.js')
 
 
@@ -19,7 +18,6 @@ const session = require('express-session');
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const { Google_Strategy } = require('./Config/Google_auth.js')
-const { Linkdin_strategy } = require('./Config/Linkdin_auth.js')
 
 const app = express()
 
@@ -41,7 +39,6 @@ app.use(passport.session());
 
 //google, linkdin auth/////////////////////////////////////////////////
 passport.use(Google_Strategy);
-passport.use(Linkdin_strategy);
 
 
 passport.serializeUser(function (user, done) {
