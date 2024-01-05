@@ -10,9 +10,11 @@ exports.database = async () => {
         const db = mysql.createPool({
             connectionLimit: 100,
             host: process.env.HOST,
+            port: process.env.DATABASE_PORT,
             user: process.env.USER,
             password: process.env.PASSWORD,
-            database: process.env.DATABASE
+            database: process.env.DATABASE,
+            connectTimeout: 30000
         })
 
         return db
