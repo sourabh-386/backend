@@ -1,0 +1,21 @@
+.background-masker {
+    background-color: #fff;
+    position: absolute;
+}
+
+
+@keyframes placeHolderShimmer {
+    0% {
+        background-position: -800px 0
+    }
+
+    100% {
+        background-position: 800px 0
+    }
+}
+
+
+
+.sidebox {
+    height: 400px;
+}

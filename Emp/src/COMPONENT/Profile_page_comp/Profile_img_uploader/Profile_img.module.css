@@ -1,0 +1,10 @@
+.btn1 {
+    background-color: rgb(252, 62, 62);
+    transition: all 0.4s ease-in-out;
+}
+
+.btn2 {
+    background-color: #007fbc;
+    transition: all 0.4s ease-in-out;
+
+}
