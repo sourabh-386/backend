@@ -103,7 +103,7 @@ exports.user_login = async (req, res) => {
 
         const User_Email = value.Email.trim()
 
-        const User_Password = value.Password.trim()
+        const User_Password = value.Password ? value.Password.trim() : value.Password
 
         sql = `Select Email,Password,User_id from client_detail where Email=  ?`;
         const [result] = await conn.query(sql, User_Email);
@@ -111,65 +111,68 @@ exports.user_login = async (req, res) => {
         if (result.length > 0) {
 
             const Password = result[0].Password
-
-            const User_id = result[0].User_id
-
-            const ismatch = await bcrypt.compare(User_Password, Password)
-
-            console.log(User_Password, ismatch)
+            if (result[0].Password) {
 
 
-            if (ismatch) {
+                const User_id = result[0].User_id
 
-                const jwtToken = jwt.sign({ user_email: User_Email, user_id: User_id }, process.env.JWT_SECRET_KEY, { expiresIn: '5d' }) //GENRATING JWT TOKEN
+                const ismatch = await bcrypt.compare(User_Password, Password)
 
-                //checking genraldetails filled or npt
-                const check_user_data = 'SELECT COUNT(*) AS count FROM client_genral_info WHERE User_id = ?';
-                const [rows] = await conn.query(check_user_data, User_id);
-                const recordExists = rows[0].count > 0;
-
-                //checking personaldetails filled or npt
-                const check_user_data2 = 'SELECT COUNT(*) AS count FROM Personal_info WHERE User_id = ?';
-                const [rows2] = await conn.query(check_user_data2, User_id);
-                const recordExists2 = rows2[0].count > 0;
+                console.log(User_Password, ismatch)
 
 
-                const data = await featching_all(conn, User_id)
+                if (ismatch) {
 
-                conn.release();
+                    const jwtToken = jwt.sign({ user_email: User_Email, user_id: User_id }, process.env.JWT_SECRET_KEY, { expiresIn: '5d' }) //GENRATING JWT TOKEN
 
-                if (recordExists && recordExists2) {
-                    res.status(200).send({ 'val': 'Login Successfull', 'token': jwtToken, 'Data1': true, 'Data2': true, 'output': data, User_id: User_id })
-                }
-                else if (recordExists) {
-                    res.status(200).send({ 'val': 'Login Successfull', 'token': jwtToken, 'Data1': true, 'Data2': false, 'output': data, User_id: User_id })
-                }
-                else if (recordExists2) {
-                    res.status(200).send({ 'val': 'Login Successfull', 'token': jwtToken, 'Data2': true, 'Data1': false, 'output': data, User_id: User_id })
+                    //checking genraldetails filled or npt
+                    const check_user_data = 'SELECT COUNT(*) AS count FROM client_genral_info WHERE User_id = ?';
+                    const [rows] = await conn.query(check_user_data, User_id);
+                    const recordExists = rows[0].count > 0;
+
+                    //checking personaldetails filled or npt
+                    const check_user_data2 = 'SELECT COUNT(*) AS count FROM Personal_info WHERE User_id = ?';
+                    const [rows2] = await conn.query(check_user_data2, User_id);
+                    const recordExists2 = rows2[0].count > 0;
+
+
+                    const data = await featching_all(conn, User_id)
+
+                    conn.release();
+
+                    if (recordExists && recordExists2) {
+                        res.status(200).send({ 'val': 'Login Successfull', 'token': jwtToken, 'Data1': true, 'Data2': true, 'output': data, User_id: User_id })
+                    }
+                    else if (recordExists) {
+                        res.status(200).send({ 'val': 'Login Successfull', 'token': jwtToken, 'Data1': true, 'Data2': false, 'output': data, User_id: User_id })
+                    }
+                    else if (recordExists2) {
+                        res.status(200).send({ 'val': 'Login Successfull', 'token': jwtToken, 'Data2': true, 'Data1': false, 'output': data, User_id: User_id })
+                    }
+                    else {
+                        res.status(200).send({ 'val': 'Login Successfull', 'token': jwtToken, 'Data1': false, 'Data2': false, 'output': data, User_id: User_id })
+                    }
+
                 }
                 else {
-                    res.status(200).send({ 'val': 'Login Successfull', 'token': jwtToken, 'Data1': false, 'Data2': false, 'output': data, User_id: User_id })
+                    conn.release();
+                    res.status(401).send({ 'val': 'Incorrect Password' })
                 }
 
             }
-            else {
-                conn.release();
-                res.status(401).send({ 'val': 'Incorrect Password' })
-            }
-
-
+            else { res.status(401).send({ 'val': 'Signin with google.' }) }
 
         }
         else {
             conn.release();
-            res.status(404).send({ 'val': 'User Not Found' })
+            res.status(404).send({ 'val': 'User Not Found.' })
         }
 
 
     } catch (error) {
 
 
-        console.error(error);
+        console.log(error);
         // await conn.rollback();
         conn.release();
         res.status(500).send(error);
@@ -177,6 +180,7 @@ exports.user_login = async (req, res) => {
     }
 
 }
+
 
 
 
